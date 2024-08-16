@@ -49,12 +49,45 @@ let
     dependencies = with python3Packages; [
       numpy
       click
-
-      # vpype
     ];
 
     pythonRemoveDeps = [
       "vpype"
+    ];
+  };
+
+  vpype-hatched = python3Packages.buildPythonPackage rec {
+    pname = "vpype-hatched";
+    version = "0.2.0";
+
+    src = fetchFromGitHub {
+      owner = "plottertools";
+      repo = "hatched";
+      rev = version;
+      hash = "sha256-k2x4LPkPY2KLAUuTUNvI7ez7w6DuXT3xiB7x/5RD0lA=";
+    };
+
+    pyproject = true;
+
+    nativeBuildInputs = with python3Packages; [
+      setuptools
+
+      pythonRelaxDepsHook
+    ];
+
+    dependencies = with python3Packages; [
+      numpy
+      click
+      scikit-image
+      svgwrite
+      shapely
+      matplotlib
+      opencv4
+    ];
+
+    pythonRemoveDeps = [
+      "vpype"
+      "opencv-python-headless"
     ];
   };
 
@@ -105,17 +138,12 @@ let
       pillow
       pyside6
     ];
-
-    optional-dependencies = {
-      "all" = [
-        vpype-gcode
-      ];
-    };
   };
 
 in (python3Packages.toPythonApplication vpype).overridePythonAttrs (old: {
   dependencies = old.dependencies ++ [
     vpype-gcode
+    vpype-hatched
   ];
 })
 
