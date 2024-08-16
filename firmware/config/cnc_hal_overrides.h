@@ -5,22 +5,26 @@ extern "C"
 {
 #endif
 
-#include "cnc_hal_reset.h"
 #define S_CURVE_ACCELERATION_LEVEL 0
+
 #define DISABLE_ALL_CONTROLS
 #define DISABLE_ALL_LIMITS
 #define DISABLE_PROBE
+
 #define TOOL1 pen_servo
 #define PEN_SERVO SERVO0
-#define PEN_SERVO_LOW 50
-#define PEN_SERVO_MID 127
-#define PEN_SERVO_HIGH 255
-#define ENCODERS 0
-//Custom configurations
-// disable some features to make the code smaller
+#define PEN_SERVO_LOW 130
+#define PEN_SERVO_HIGH 200
+
+#define DELAY_ON_RESUME_SPINDLE 0
+#define DELAY_ON_SPINDLE_SPEED_CHANGE 0
+#define DELAY_ON_RESUME_COOLANT 0
+
 #define DISABLE_SETTINGS_MODULES
 #define DISABLE_MULTISTREAM_SERIAL
 #define DISABLE_RTC_CODE
+
+#define ENABLE_STEPPERS_DISABLE_TIMEOUT
 
 #ifdef __cplusplus
 }

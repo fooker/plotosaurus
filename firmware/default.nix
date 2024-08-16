@@ -17,9 +17,11 @@ let
     src = fetchFromGitHub {
       owner = "Paciente8159";
       repo = "uCNC";
-      rev = "v1.9.4";
-      hash = "sha256-L6oz9mqL55uwhWPD9Yfj7n7ccUMb+g9oHtW1IGajARg=";
+      rev = "v1.10.0";
+      hash = "sha256-Qpm+Vw3VGWH/aE0W9VaiG0CuQrhYWx6ZUo1sfUAfHbY=";
     };
+
+#    patches = [ ./stepper-fix.patch ];
   
     nativeBuildInputs = [
       pkgsCross.avr.buildPackages.gcc7
