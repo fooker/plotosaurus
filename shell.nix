@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {}, ... }:
 
 let
-  vpype = (pkgs.callPackage ./vpype.nix { }).overrideAttrs (old: {
+  vpype = (pkgs.callPackage ./tools/vpype.nix { }).overrideAttrs (old: {
     nativeBuildInputs = old.nativeBuildInputs ++ [
       pkgs.makeWrapper
     ];
@@ -12,13 +12,15 @@ let
     '';
   });
   
-  svg2gcode = pkgs.callPackage ./svg2gcode.nix { };
+  svg2gcode = pkgs.callPackage ./tools/svg2gcode.nix { };
+  bcnc = pkgs.callPackage ./tools/bcnc.nix { };
 
 in
 pkgs.mkShell {
   packages = [
     vpype
     svg2gcode
+    bcnc
 
     pkgs.inkscape
   ];
